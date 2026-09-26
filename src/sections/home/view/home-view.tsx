@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useScrollSpy } from '@/hooks/use-scroll-spy';
 import { LetterAnimation } from '@/components';
 import {
@@ -56,10 +56,12 @@ export default function HomeView() {
   // Show letter animation first
   if (showLetter) {
     return (
-      <LetterAnimation
-        onOpen={handleLetterOpen}
-        coupleName={`${WEDDING_CONFIG.bride.name} & ${WEDDING_CONFIG.groom.name}`}
-      />
+      <Suspense fallback={null}>
+        <LetterAnimation
+          onOpen={handleLetterOpen}
+          coupleName={`${WEDDING_CONFIG.bride.name} & ${WEDDING_CONFIG.groom.name}`}
+        />
+      </Suspense>
     );
   }
 

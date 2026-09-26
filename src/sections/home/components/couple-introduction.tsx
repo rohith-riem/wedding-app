@@ -66,7 +66,7 @@ export const CoupleIntroduction = ({
             {/* Photo Frame */}
             <div className="rounded-3xl overflow-hidden border-8 border-white shadow-2xl bg-rose-50">
               <Image
-                src="/images/couple.jpg"
+                src="/assets/images/couple.jpg"
                 alt={`${groom.fullName} and ${bride.fullName}`}
                 width={1536}
                 height={2048}

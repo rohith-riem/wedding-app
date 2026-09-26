@@ -37,9 +37,11 @@ export const CoupleIntroduction = ({
           className="text-center mb-16"
         >
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif text-gray-800 mb-4">
-            {t('couple.our-story')}
+            Meet Us
           </h2>
+
           <div className="w-24 h-px bg-rose-400 mx-auto"></div>
+
           <p className="text-base sm:text-lg md:text-xl text-gray-600 mt-6 max-w-2xl mx-auto">
             {t('couple.story-text')}
           </p>
@@ -65,6 +67,7 @@ export const CoupleIntroduction = ({
                   loading="lazy"
                 />
               </div>
+
               <div className="absolute -bottom-4 -right-4 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-rose-400 rounded-full flex items-center justify-center shadow-lg">
                 <span className="text-white text-xl sm:text-2xl">👸</span>
               </div>
@@ -73,9 +76,11 @@ export const CoupleIntroduction = ({
             <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif text-gray-800 mb-2">
               {bride.fullName}
             </h3>
+
             <p className="text-base sm:text-lg md:text-xl text-rose-600 mb-4 font-medium">
               {t('couple.the-bride')}
             </p>
+
             <p className="text-sm sm:text-base md:text-lg text-gray-600 leading-relaxed max-w-md mx-auto lg:mx-0 lg:ml-auto">
               {t('couple.bride-description')}
             </p>
@@ -92,7 +97,10 @@ export const CoupleIntroduction = ({
           <div className="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
             <motion.div
               initial={{ scale: 0, rotate: -180 }}
-              animate={{ scale: inView ? 1 : 0, rotate: inView ? 0 : -180 }}
+              animate={{
+                scale: inView ? 1 : 0,
+                rotate: inView ? 0 : -180,
+              }}
               transition={{ duration: 1, delay: 0.5 }}
               className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-xl border-4 border-rose-100"
             >
@@ -106,7 +114,10 @@ export const CoupleIntroduction = ({
           <div className="lg:hidden flex justify-center -my-6 z-10">
             <motion.div
               initial={{ scale: 0, rotate: -180 }}
-              animate={{ scale: inView ? 1 : 0, rotate: inView ? 0 : -180 }}
+              animate={{
+                scale: inView ? 1 : 0,
+                rotate: inView ? 0 : -180,
+              }}
               transition={{ duration: 1, delay: 0.5 }}
               className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-xl border-4 border-rose-100"
             >
@@ -133,6 +144,7 @@ export const CoupleIntroduction = ({
                   className="rounded-full object-cover"
                 />
               </div>
+
               <div className="absolute -bottom-4 -left-4 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-blue-400 rounded-full flex items-center justify-center shadow-lg">
                 <span className="text-white text-xl sm:text-2xl">🤴</span>
               </div>
@@ -141,9 +153,11 @@ export const CoupleIntroduction = ({
             <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif text-gray-800 mb-2">
               {groom.fullName}
             </h3>
+
             <p className="text-base sm:text-lg md:text-xl text-blue-600 mb-4 font-medium">
               {t('couple.the-groom')}
             </p>
+
             <p className="text-sm sm:text-base md:text-lg text-gray-600 leading-relaxed max-w-md mx-auto lg:mx-0">
               {t('couple.groom-description')}
             </p>
@@ -165,10 +179,9 @@ export const CoupleIntroduction = ({
           className="text-center mt-16"
         >
           <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-8 max-w-2xl mx-auto shadow-lg border border-white/40">
-            <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-serif text-gray-700 italic mb-4">
+            <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-serif text-gray-700 italic">
               {t('couple.love-quote')}
             </p>
-            <p className="text-gray-500 text-xs sm:text-sm">— Clannad</p>
           </div>
         </motion.div>
       </div>

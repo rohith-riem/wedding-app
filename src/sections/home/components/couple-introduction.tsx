@@ -59,18 +59,18 @@ export const CoupleIntroduction = ({
             y: inView ? 0 : 40,
           }}
           transition={{ duration: 0.9, delay: 0.2 }}
-          className="flex justify-center mb-14"
+          className="flex justify-center mb-16"
         >
-          <div className="relative w-full max-w-3xl">
+          <div className="relative w-full max-w-xl">
 
             {/* Photo Frame */}
             <div className="rounded-3xl overflow-hidden border-8 border-white shadow-2xl bg-rose-50">
               <Image
                 src="/images/couple.jpg"
                 alt={`${groom.fullName} and ${bride.fullName}`}
-                width={1200}
-                height={800}
-                className="w-full h-auto object-cover"
+                width={1536}
+                height={2048}
+                className="w-full h-auto object-contain"
                 priority
               />
             </div>

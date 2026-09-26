@@ -24,8 +24,13 @@ export const CountdownTimer = ({ targetDate }: CountdownTimerProps) => {
   });
 
   useEffect(() => {
-    const weddingDate = new Date('2026-11-15T07:30:00+05:30').getTime();
-    const receptionDate = new Date('2026-11-22T17:00:00+05:30').getTime();
+    const weddingDate = new Date(
+      '2026-11-15T07:30:00+05:30'
+    ).getTime();
+
+    const receptionDate = new Date(
+      '2026-11-22T17:00:00+05:30'
+    ).getTime();
 
     const updateCountdown = () => {
       const now = new Date().getTime();
@@ -53,6 +58,7 @@ export const CountdownTimer = ({ targetDate }: CountdownTimerProps) => {
           minutes: 0,
           seconds: 0,
         });
+
         return;
       }
 
@@ -205,7 +211,7 @@ export const CountdownTimer = ({ targetDate }: CountdownTimerProps) => {
             className="mt-10"
           >
             <p className="text-gray-600 text-sm sm:text-base">
-              We can't wait to celebrate with you.
+              We can&apos;t wait to celebrate with you.
             </p>
           </motion.div>
         )}

@@ -1,25 +1,29 @@
 export const WEDDING_CONFIG = {
-  date: new Date('2025-10-15T16:00:00'),
+  date: new Date('2026-11-15T07:30:00'),
+
   bride: {
-    name: 'Mio',
-    fullName: 'Akiyama Mio',
+    name: 'Sruthi',
+    fullName: 'Sruthi K.',
     photo: '/assets/images/bride-circle.png',
   },
+
   groom: {
-    name: 'Fiqri',
-    fullName: 'M Fiqri Haikhar Anwar',
+    name: 'Rohith',
+    fullName: 'Rohith A. C.',
     photo: '/assets/images/groom-circle.png',
   },
+
   venue: {
     ceremony: {
-      name: 'Masjid Songkok Recca Bone',
-      address: 'Jl. Jend. Ahmad Yani',
-      time: '4:00 PM',
+      name: 'Thirumathi Poovayammal Thirumana Mandapam',
+      address: 'Rasipuram, Namakkal District',
+      time: '7:30 AM – 9:00 AM',
     },
+
     reception: {
-      name: 'Hotel Novena Bone',
-      address: 'Jl. Jend. Ahmad Yani No.25',
-      time: '6:30 PM',
+      name: 'Krishna Pillai Memorial Auditorium',
+      address: 'Kovoor, Kozhikode',
+      time: '5:00 PM – 9:00 PM',
     },
   },
 };

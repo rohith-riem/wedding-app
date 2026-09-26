@@ -25,7 +25,7 @@ export const HeroSection = ({
       </div>
 
       {/* Main content */}
-      <div className="relative z-10 min-h-screen flex items-center justify-center px-6 py-16">
+      <div className="relative z-10 min-h-screen flex items-center justify-center px-6 pt-32 pb-16">
 
         <div className="max-w-4xl mx-auto text-center">
 
@@ -77,11 +77,11 @@ export const HeroSection = ({
             transition={{ duration: 1, delay: 0.9 }}
           >
             <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-gray-800 leading-tight">
-              {couple.bride.name}
+              {couple.groom.name}
               <span className="block text-rose-400 text-3xl sm:text-4xl md:text-5xl my-2">
                 &
               </span>
-              {couple.groom.name}
+              {couple.bride.name}
             </h1>
           </motion.div>
 

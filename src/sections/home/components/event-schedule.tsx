@@ -2,51 +2,35 @@
 
 import { motion } from 'motion/react';
 import { useInView } from 'react-intersection-observer';
-import { useTranslation } from 'react-i18next';
 
 export const EventSchedule = () => {
-  const { t } = useTranslation('home');
-
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.2,
   });
 
-  const scheduleItems = [
+  const events = [
     {
-      time: '3:30 PM',
-      event: t('schedule.guest-arrival'),
-      description: t('schedule.welcome-drinks'),
+      date: '15 NOVEMBER 2026',
+      title: 'THE WEDDING',
+      time: '7:30 AM – 9:00 AM',
+      venue: 'Thirumathi Poovayammal Thirumana Mandapam',
+      address: 'Rasipuram, Namakkal District',
+      mapUrl:
+        'https://www.google.com/maps/search/?api=1&query=Thirumathi+Poovayammal+Thirumana+Mandapam+Rasipuram+Namakkal',
+      calendarUrl:
+        'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Rohith%20%26%20Sruthi%20-%20Wedding%20Ceremony&dates=20261115T073000/20261115T090000&ctz=Asia%2FKolkata&location=Thirumathi%20Poovayammal%20Thirumana%20Mandapam%2C%20Rasipuram%2C%20Namakkal%20District',
     },
     {
-      time: '4:00 PM',
-      event: t('schedule.wedding-ceremony'),
-      description: t('schedule.vows'),
-    },
-    {
-      time: '4:30 PM',
-      event: t('schedule.photography'),
-      description: t('schedule.welcome-drink'),
-    },
-    {
-      time: '6:30 PM',
-      event: t('schedule.reception-begins'),
-      description: t('schedule.dinner-celebration'),
-    },
-    {
-      time: '7:30 PM',
-      event: t('schedule.first-dance'),
-      description: t('schedule.special-moment'),
-    },
-    {
-      time: '8:00 PM',
-      event: t('schedule.dancing-party'),
-      description: t('schedule.celebration-continues'),
-    },
-    {
-      time: '12:00 AM',
-      event: t('schedule.send-off'),
-      description: t('schedule.sparkler-farewell'),
+      date: '22 NOVEMBER 2026',
+      title: 'THE RECEPTION',
+      time: '5:00 PM – 9:00 PM',
+      venue: 'Krishna Pillai Memorial Auditorium',
+      address: 'Kovoor, Kozhikode',
+      mapUrl:
+        'https://www.google.com/maps/place/P.+Krishna+Pillai+Memorial+Auditorium,+Kovoor/@11.2689555,75.8289195,17z/data=!3m1!4b1!4m6!3m5!1s0x3ba65be1128a88dd:0xe3785dd6d68a258f!8m2!3d11.2689503!4d75.8314944!16s%2Fg%2F11v059wpqn?entry=ttu&g_ep=EgoyMDI2MDkyMi4wIKXMDSoASAFQAw%3D%3D',
+      calendarUrl:
+        'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Rohith%20%26%20Sruthi%20-%20Wedding%20Reception&dates=20261122T170000/20261122T210000&ctz=Asia%2FKolkata&location=Krishna%20Pillai%20Memorial%20Auditorium%2C%20Kovoor%2C%20Kozhikode',
     },
   ];
 
@@ -55,62 +39,96 @@ export const EventSchedule = () => {
       ref={ref}
       className="py-16 px-4 bg-gradient-to-b from-white to-gray-50"
     >
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-5xl mx-auto">
+
+        {/* Section heading */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 30 }}
+          animate={{
+            opacity: inView ? 1 : 0,
+            y: inView ? 0 : 30,
+          }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-12"
+          className="text-center mb-14"
         >
-          <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif text-gray-800 mb-4">
-            {t('schedule.title')}
+          <p className="text-rose-500 tracking-[0.3em] text-sm uppercase mb-3">
+            Two moments, one beautiful journey
+          </p>
+
+          <h3 className="text-3xl sm:text-4xl md:text-5xl font-serif text-gray-800 mb-4">
+            Our Celebrations
           </h3>
+
           <div className="w-20 h-px bg-rose-400 mx-auto"></div>
         </motion.div>
 
-        <div className="relative">
-          {/* Timeline line */}
-          <div className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 top-0 bottom-0 w-px bg-rose-200"></div>
+        {/* Events */}
+        <div className="grid md:grid-cols-2 gap-8">
 
-          <div className="space-y-8">
-            {scheduleItems.map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 30 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className={`relative flex items-center ${
-                  index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-                } flex-row`}
-              >
-                {/* Timeline dot */}
-                <div className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 w-4 h-4 bg-rose-400 rounded-full border-4 border-white shadow-lg z-10"></div>
+          {events.map((event, index) => (
+            <motion.div
+              key={event.title}
+              initial={{ opacity: 0, y: 40 }}
+              animate={{
+                opacity: inView ? 1 : 0,
+                y: inView ? 0 : 40,
+              }}
+              transition={{
+                duration: 0.7,
+                delay: index * 0.2,
+              }}
+              className="bg-white rounded-3xl p-7 sm:p-9 shadow-lg border border-rose-100 text-center"
+            >
 
-                {/* Content */}
-                <div
-                  className={`flex-1 ${
-                    index % 2 === 0
-                      ? 'md:text-right md:pr-8'
-                      : 'md:text-left md:pl-8'
-                  } pl-12 md:pl-0`}
+              {/* Date */}
+              <div className="text-rose-500 tracking-[0.25em] text-sm font-medium mb-4">
+                {event.date}
+              </div>
+
+              {/* Title */}
+              <h4 className="text-2xl sm:text-3xl font-serif text-gray-800 mb-5">
+                {event.title}
+              </h4>
+
+              {/* Time */}
+              <div className="inline-block bg-rose-50 text-rose-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
+                {event.time}
+              </div>
+
+              {/* Venue */}
+              <h5 className="text-lg sm:text-xl font-semibold text-gray-800 mb-2">
+                {event.venue}
+              </h5>
+
+              <p className="text-gray-600 text-sm sm:text-base mb-7">
+                {event.address}
+              </p>
+
+              {/* Buttons */}
+              <div className="flex flex-col sm:flex-row justify-center gap-3">
+
+                <a
+                  href={event.mapUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-5 py-3 rounded-full bg-rose-500 text-white text-sm font-medium hover:bg-rose-600 transition-colors"
                 >
-                  <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
-                    <div className="flex items-center mb-2">
-                      <span className="bg-rose-100 text-rose-700 px-3 py-1 rounded-full text-xs sm:text-sm font-medium">
-                        {item.time}
-                      </span>
-                    </div>
-                    <h4 className="text-base sm:text-lg md:text-xl font-semibold text-gray-800 mb-1">
-                      {item.event}
-                    </h4>
-                    <p className="text-gray-600 text-xs sm:text-sm md:text-base">
-                      {item.description}
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+                  VIEW ON MAP
+                </a>
+
+                <a
+                  href={event.calendarUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-5 py-3 rounded-full border border-rose-300 text-rose-600 text-sm font-medium hover:bg-rose-50 transition-colors"
+                >
+                  ADD TO CALENDAR
+                </a>
+
+              </div>
+            </motion.div>
+          ))}
+
         </div>
       </div>
     </div>

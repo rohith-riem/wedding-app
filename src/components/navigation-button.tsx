@@ -1,8 +1,8 @@
 import { NAVIGATION_ANIMATIONS } from '@/constants/navigation';
 import type { NavigationSection } from '@/types/navigation';
 import { motion, AnimatePresence } from 'motion/react';
-import { useTranslation } from 'react-i18next';
 import type { Transition } from 'motion/react';
+import { useTranslation } from 'react-i18next';
 
 interface NavigationButtonProps {
   section: NavigationSection;
@@ -29,6 +29,9 @@ export function NavigationButton({
 
   const backgroundTransition =
     NAVIGATION_ANIMATIONS.background.transition as Transition;
+
+  const pulseTransition =
+    NAVIGATION_ANIMATIONS.pulse.transition as Transition;
 
   return (
     <motion.button
@@ -101,7 +104,7 @@ export function NavigationButton({
           >
             <motion.div
               animate={NAVIGATION_ANIMATIONS.pulse.animate}
-              transition={NAVIGATION_ANIMATIONS.pulse.transition}
+              transition={pulseTransition}
               className="w-full h-full bg-white rounded-full"
             />
           </motion.div>

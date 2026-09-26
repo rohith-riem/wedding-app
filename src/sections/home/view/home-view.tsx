@@ -6,12 +6,10 @@ import { LetterAnimation } from '@/components';
 import {
   HeroSection,
   CoupleIntroduction,
-  WeddingDetailsCard,
   CountdownTimer,
   VenueInformation,
   EventSchedule,
   RSVP,
-  GalleryPreview,
   ClosingMessage,
   FloatingNavigation,
   NavigationFAB,
@@ -90,12 +88,8 @@ export default function HomeView() {
         />
       </section>
 
-      {/* Wedding Details */}
+      {/* Countdown */}
       <section id="details" className="relative">
-        <WeddingDetailsCard
-          date={WEDDING_CONFIG.date}
-          venue={WEDDING_CONFIG.venue}
-        />
         <CountdownTimer targetDate={WEDDING_CONFIG.date} />
       </section>
 
@@ -103,11 +97,6 @@ export default function HomeView() {
       <section id="venue" className="relative">
         <VenueInformation venue={WEDDING_CONFIG.venue} />
         <EventSchedule />
-      </section>
-
-      {/* Gallery Preview */}
-      <section id="gallery" className="relative">
-        <GalleryPreview />
       </section>
 
       {/* RSVP Section */}

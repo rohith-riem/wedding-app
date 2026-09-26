@@ -2,8 +2,8 @@ import { NAVIGATION_ANIMATIONS } from '@/constants/navigation';
 import type { NavigationSection } from '@/types/navigation';
 import { motion, AnimatePresence } from 'motion/react';
 import { useTranslation } from 'react-i18next';
+import type { Transition } from 'motion/react';
 
-// NavigationButton Component for better code organization
 interface NavigationButtonProps {
   section: NavigationSection;
   index: number;
@@ -27,6 +27,9 @@ export function NavigationButton({
   const inactiveClasses =
     'text-gray-600 hover:text-rose-500 hover:bg-rose-50/80';
 
+  const backgroundTransition =
+    NAVIGATION_ANIMATIONS.background.transition as Transition;
+
   return (
     <motion.button
       onClick={onClick}
@@ -44,7 +47,7 @@ export function NavigationButton({
             initial={NAVIGATION_ANIMATIONS.background.initial}
             animate={NAVIGATION_ANIMATIONS.background.animate}
             exit={NAVIGATION_ANIMATIONS.background.exit}
-            transition={NAVIGATION_ANIMATIONS.background.transition}
+            transition={backgroundTransition}
             className={`absolute inset-0 bg-gradient-to-r ${section.gradient} rounded-lg sm:rounded-xl`}
           />
         )}
@@ -63,7 +66,7 @@ export function NavigationButton({
         )}
       </AnimatePresence>
 
-      {/* Icon with Bounce Animation */}
+      {/* Icon */}
       <motion.span
         className="text-sm sm:text-base relative z-10"
         animate={isActive ? NAVIGATION_ANIMATIONS.icon.active : {}}
@@ -73,7 +76,7 @@ export function NavigationButton({
         {section.icon}
       </motion.span>
 
-      {/* Label with Slide Animation */}
+      {/* Label */}
       <motion.span
         className="hidden sm:inline-block whitespace-nowrap relative z-10 text-xs sm:text-sm"
         initial={{ opacity: 0, x: -10 }}
@@ -86,14 +89,14 @@ export function NavigationButton({
         }
       </motion.span>
 
-      {/* Active Indicator Dot with Pulse */}
+      {/* Active Indicator */}
       <AnimatePresence>
         {isActive && (
           <motion.div
             initial={NAVIGATION_ANIMATIONS.background.initial}
             animate={{ scale: 1, opacity: 1 }}
             exit={NAVIGATION_ANIMATIONS.background.exit}
-            transition={NAVIGATION_ANIMATIONS.background.transition}
+            transition={backgroundTransition}
             className="absolute -bottom-0.5 sm:-bottom-1 left-1/2 -translate-x-1/2 w-0.5 sm:w-1 h-0.5 sm:h-1 bg-white rounded-full shadow-lg z-10"
           >
             <motion.div
@@ -105,7 +108,7 @@ export function NavigationButton({
         )}
       </AnimatePresence>
 
-      {/* Hover Ripple Effect */}
+      {/* Hover Ripple */}
       <motion.div
         className="absolute inset-0 rounded-lg sm:rounded-xl opacity-0 group-hover:opacity-10 transition-opacity duration-300"
         style={{
@@ -118,7 +121,6 @@ export function NavigationButton({
   );
 }
 
-// Helper function to get ripple color
 const getRippleColor = (gradient: string): string => {
   return gradient.includes('rose') ? '#f43f5e' : '#8b5cf6';
 };

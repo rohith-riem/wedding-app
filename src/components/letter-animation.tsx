@@ -25,9 +25,10 @@ export const LetterAnimation = ({
 
   const handleClick = () => {
     setIsOpening(true);
+
     setTimeout(() => {
       onOpen();
-    }, 2500);
+    }, 5000);
   };
 
   return (
@@ -79,6 +80,7 @@ export const LetterAnimation = ({
             <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif text-gray-800 mb-4">
               {t('hero.welcome')}
             </h1>
+
             <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-md mx-auto">
               {toName ? (
                 <>
@@ -143,7 +145,10 @@ export const LetterAnimation = ({
                     rotateX: isOpening ? -180 : 0,
                     z: isOpening ? 50 : 0,
                   }}
-                  transition={{ duration: 1, delay: isOpening ? 0.2 : 0 }}
+                  transition={{
+                    duration: 1,
+                    delay: isOpening ? 0.2 : 0,
+                  }}
                 />
               </motion.div>
 
@@ -160,6 +165,7 @@ export const LetterAnimation = ({
                       <div className="text-rose-500 text-2xl sm:text-3xl mb-4">
                         💕
                       </div>
+
                       {toName && (
                         <p className="text-sm sm:text-base text-gray-600 mb-2">
                           {t('letter.to')}:{' '}
@@ -168,12 +174,15 @@ export const LetterAnimation = ({
                           </span>
                         </p>
                       )}
+
                       <h3 className="text-lg sm:text-xl font-serif text-gray-800 mb-2">
                         {coupleName}
                       </h3>
+
                       <p className="text-sm sm:text-base text-gray-600 mb-4">
                         {t('letter.invitation-title')}
                       </p>
+
                       <div className="text-xs sm:text-sm text-gray-500 font-serif italic">
                         &ldquo;{t('letter.invitation-quote')}&rdquo;
                       </div>
@@ -237,6 +246,7 @@ export const LetterAnimation = ({
                 ? t('letter.click-to-open-hover')
                 : t('letter.click-to-open')}
             </motion.p>
+
             <div className="flex justify-center mt-4">
               <motion.div
                 animate={{
@@ -269,9 +279,14 @@ export const LetterAnimation = ({
             <div className="text-center">
               <motion.div
                 animate={{ rotate: 360 }}
-                transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: 'linear',
+                }}
                 className="w-12 h-12 border-4 border-rose-200 border-t-rose-500 rounded-full mx-auto mb-4"
               />
+
               <p className="text-gray-600 text-lg font-medium">
                 {t('letter.opening-the-invitation')}
               </p>

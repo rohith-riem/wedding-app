@@ -54,6 +54,26 @@ export default function MusicPlayer({
       setCurrentTime(0);
     };
 
+    const removeInteractionListeners = () => {
+      window.removeEventListener('click', handleFirstInteraction);
+      window.removeEventListener('touchstart', handleFirstInteraction);
+      window.removeEventListener('pointerdown', handleFirstInteraction);
+      window.removeEventListener('keydown', handleFirstInteraction);
+      window.removeEventListener('scroll', handleFirstInteraction);
+    };
+
+    const handleFirstInteraction = async () => {
+      userInteractedRef.current = true;
+
+      try {
+        await audio.play();
+      } catch {
+        setIsPlaying(false);
+      }
+
+      removeInteractionListeners();
+    };
+
     const tryStartMusic = async () => {
       if (autoplayAttemptedRef.current) {
         return;
@@ -71,26 +91,6 @@ export default function MusicPlayer({
         autoplayAttemptedRef.current = false;
         setIsPlaying(false);
       }
-    };
-
-    const handleFirstInteraction = async () => {
-      userInteractedRef.current = true;
-
-      try {
-        await audio.play();
-      } catch {
-        setIsPlaying(false);
-      }
-
-      removeInteractionListeners();
-    };
-
-    const removeInteractionListeners = () => {
-      window.removeEventListener('click', handleFirstInteraction);
-      window.removeEventListener('touchstart', handleFirstInteraction);
-      window.removeEventListener('pointerdown', handleFirstInteraction);
-      window.removeEventListener('keydown', handleFirstInteraction);
-      window.removeEventListener('scroll', handleFirstInteraction);
     };
 
     audio.addEventListener('timeupdate', handleTimeUpdate);
@@ -167,12 +167,12 @@ export default function MusicPlayer({
         ref={audioRef}
         loop
         preload="auto"
-        src="/wedding-app/assets/music/Let%20The%20Celebration%20Begin.mp3"
+        src="/wedding-app/assets/audio/Let%20The%20Celebration%20Begin.mp3"
         aria-label="Wedding background music"
       >
         <track
           kind="captions"
-          src="/wedding-app/assets/music/Let%20The%20Celebration%20Begin.mp3"
+          src="/wedding-app/assets/audio/Let%20The%20Celebration%20Begin.mp3"
           label="Wedding music"
         />
       </audio>

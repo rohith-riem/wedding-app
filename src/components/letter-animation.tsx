@@ -7,11 +7,13 @@ import { useSearchParams } from 'next/navigation';
 
 interface LetterAnimationProps {
   onOpen: () => void;
+  onInvitationClick?: () => void;
   coupleName: string;
 }
 
 export const LetterAnimation = ({
   onOpen,
+  onInvitationClick,
   coupleName,
 }: LetterAnimationProps) => {
   const { t } = useTranslation('home');
@@ -28,9 +30,9 @@ export const LetterAnimation = ({
       return;
     }
 
-    setIsOpening(true);
+    onInvitationClick?.();
 
-    window.dispatchEvent(new Event('wedding-invitation-opened'));
+    setIsOpening(true);
 
     setTimeout(() => {
       onOpen();

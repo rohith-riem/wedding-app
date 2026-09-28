@@ -13,7 +13,7 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: 'The Wedding of Fiqri & Beloved',
   description:
-    'Join us in celebrating the union of Fiqri and his beloved. Discover our love story, wedding details, and more.',
+    'Join us in celebrating the wedding of Rohith & Sruthi.',
 };
 
 export default function RootLayout({

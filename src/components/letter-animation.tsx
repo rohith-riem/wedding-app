@@ -24,7 +24,13 @@ export const LetterAnimation = ({
   const [isHovered, setIsHovered] = useState(false);
 
   const handleClick = () => {
+    if (isOpening) {
+      return;
+    }
+
     setIsOpening(true);
+
+    window.dispatchEvent(new Event('wedding-invitation-opened'));
 
     setTimeout(() => {
       onOpen();

@@ -4,66 +4,92 @@ import { useState, useEffect, Suspense } from 'react';
 import { useScrollSpy } from '@/hooks/use-scroll-spy';
 import { LetterAnimation } from '@/components';
 import {
-  HeroSection,
-  CoupleIntroduction,
-  CountdownTimer,
-  VenueInformation,
-  EventSchedule,
-  RSVP,
-  ClosingMessage,
-  FloatingNavigation,
-  NavigationFAB,
-  MusicPlayer,
-  ScrollProgressIndicator,
+HeroSection,
+CoupleIntroduction,
+CountdownTimer,
+VenueInformation,
+EventSchedule,
+RSVP,
+ClosingMessage,
+FloatingNavigation,
+NavigationFAB,
+MusicPlayer,
+ScrollProgressIndicator,
 } from '../components';
 import { NAVIGATION_SECTIONS, WEDDING_CONFIG } from '@/constants';
 
 export default function HomeView() {
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [showLetter, setShowLetter] = useState(true);
+const [isLoaded, setIsLoaded] = useState(false);
+const [showLetter, setShowLetter] = useState(true);
 
-  // Auto-detect active section using scroll spy
-  const activeSection = useScrollSpy(
-    NAVIGATION_SECTIONS.map((section) => section.id)
-  );
+const activeSection = useScrollSpy(
+NAVIGATION_SECTIONS.map((section) => section.id)
+);
 
-  useEffect(() => {
-    const timer = setTimeout(() => setIsLoaded(true), 300);
+useEffect(() => {
+const timer = setTimeout(() => setIsLoaded(true), 300);
 
-    return () => {
-      clearTimeout(timer);
-    };
-  }, []);
+```
+return () => {
+  clearTimeout(timer);
+};
+```
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
+}, []);
 
-    if (element) {
-      element.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-      });
-    }
-  };
+const scrollToSection = (sectionId: string) => {
+const element = document.getElementById(sectionId);
 
-  const handleLetterOpen = () => {
-    setShowLetter(false);
-    setTimeout(() => setIsLoaded(true), 300);
-  };
+```
+if (element) {
+  element.scrollIntoView({
+    behavior: 'smooth',
+    block: 'start',
+  });
+}
+```
 
-  // Show letter animation first
-  if (showLetter) {
-    return (
-      <Suspense fallback={null}>
-        <LetterAnimation
-          onOpen={handleLetterOpen}
-          coupleName={`${WEDDING_CONFIG.bride.name} & ${WEDDING_CONFIG.groom.name}`}
-        />
-      </Suspense>
-    );
-  }
+};
 
-  return (
+const handleLetterOpen = () => {
+/*
+* Send the music-start signal while we are still
+* inside the user's envelope click.
+*
+* This allows the browser to recognize audio.play()
+* as being triggered by a user interaction.
+*/
+window.dispatchEvent(new Event('wedding-invitation-opened'));
+
+```
+setShowLetter(false);
+
+setTimeout(() => {
+  setIsLoaded(true);
+}, 300);
+```
+
+};
+
+return (
+<>
+{/* Music Player
+It stays mounted while the letter is showing so that
+the audio element already exists when the user clicks
+the invitation. */}
+<MusicPlayer
+className={showLetter ? 'hidden' : ''}
+/>
+
+```
+  {showLetter ? (
+    <Suspense fallback={null}>
+      <LetterAnimation
+        onOpen={handleLetterOpen}
+        coupleName={`${WEDDING_CONFIG.bride.name} & ${WEDDING_CONFIG.groom.name}`}
+      />
+    </Suspense>
+  ) : (
     <div className="min-h-screen bg-gradient-to-br from-rose-50 via-pink-50 to-purple-50">
       <FloatingNavigation
         activeSection={activeSection}
@@ -112,9 +138,6 @@ export default function HomeView() {
         />
       </section>
 
-      {/* Music Player */}
-      <MusicPlayer shouldStart={!showLetter} />
-
       {/* Mobile Navigation FAB */}
       <NavigationFAB
         activeSection={activeSection}
@@ -124,5 +147,9 @@ export default function HomeView() {
       {/* Scroll Progress Indicator */}
       <ScrollProgressIndicator activeSection={activeSection} />
     </div>
-  );
+  )}
+</>
+```
+
+);
 }

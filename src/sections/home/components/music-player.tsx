@@ -14,6 +14,8 @@ export default function MusicPlayer({
   const { t } = useTranslation('home');
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const autoplayAttemptedRef = useRef(false);
+  const userInteractedRef = useRef(false);
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -28,6 +30,7 @@ export default function MusicPlayer({
 
     audio.volume = 0.35;
     audio.loop = true;
+    audio.preload = 'auto';
 
     const handleTimeUpdate = () => {
       setCurrentTime(audio.currentTime);
@@ -48,17 +51,46 @@ export default function MusicPlayer({
     };
 
     const handleEnded = () => {
-      setIsPlaying(false);
       setCurrentTime(0);
     };
 
-    const handleInvitationOpened = () => {
-      audio.volume = 0.35;
-      audio.loop = true;
+    const tryStartMusic = async () => {
+      if (autoplayAttemptedRef.current) {
+        return;
+      }
 
-      audio.play().catch(() => {
+      if (userInteractedRef.current) {
+        return;
+      }
+
+      autoplayAttemptedRef.current = true;
+
+      try {
+        await audio.play();
+      } catch {
+        autoplayAttemptedRef.current = false;
         setIsPlaying(false);
-      });
+      }
+    };
+
+    const handleFirstInteraction = async () => {
+      userInteractedRef.current = true;
+
+      try {
+        await audio.play();
+      } catch {
+        setIsPlaying(false);
+      }
+
+      removeInteractionListeners();
+    };
+
+    const removeInteractionListeners = () => {
+      window.removeEventListener('click', handleFirstInteraction);
+      window.removeEventListener('touchstart', handleFirstInteraction);
+      window.removeEventListener('pointerdown', handleFirstInteraction);
+      window.removeEventListener('keydown', handleFirstInteraction);
+      window.removeEventListener('scroll', handleFirstInteraction);
     };
 
     audio.addEventListener('timeupdate', handleTimeUpdate);
@@ -67,22 +99,30 @@ export default function MusicPlayer({
     audio.addEventListener('pause', handlePause);
     audio.addEventListener('ended', handleEnded);
 
-    window.addEventListener(
-      'wedding-invitation-opened',
-      handleInvitationOpened
-    );
+    window.addEventListener('click', handleFirstInteraction);
+    window.addEventListener('touchstart', handleFirstInteraction, {
+      passive: true,
+    });
+    window.addEventListener('pointerdown', handleFirstInteraction);
+    window.addEventListener('keydown', handleFirstInteraction);
+    window.addEventListener('scroll', handleFirstInteraction, {
+      passive: true,
+    });
+
+    const startTimer = window.setTimeout(() => {
+      tryStartMusic();
+    }, 100);
 
     return () => {
+      window.clearTimeout(startTimer);
+
+      removeInteractionListeners();
+
       audio.removeEventListener('timeupdate', handleTimeUpdate);
       audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
       audio.removeEventListener('play', handlePlay);
       audio.removeEventListener('pause', handlePause);
       audio.removeEventListener('ended', handleEnded);
-
-      window.removeEventListener(
-        'wedding-invitation-opened',
-        handleInvitationOpened
-      );
     };
   }, []);
 
@@ -92,6 +132,8 @@ export default function MusicPlayer({
     if (!audio) {
       return;
     }
+
+    userInteractedRef.current = true;
 
     try {
       if (audio.paused) {

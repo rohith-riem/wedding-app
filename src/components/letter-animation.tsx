@@ -28,7 +28,7 @@ export const LetterAnimation = ({
 
     setTimeout(() => {
       onOpen();
-    }, 5000);
+    }, 3500);
   };
 
   return (
@@ -182,10 +182,6 @@ export const LetterAnimation = ({
                       <p className="text-sm sm:text-base text-gray-600 mb-4">
                         {t('letter.invitation-title')}
                       </p>
-
-                      <div className="text-xs sm:text-sm text-gray-500 font-serif italic">
-                        &ldquo;{t('letter.invitation-quote')}&rdquo;
-                      </div>
                     </div>
                   </motion.div>
                 )}

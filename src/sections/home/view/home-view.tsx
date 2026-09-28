@@ -45,9 +45,11 @@ export default function HomeView() {
     }
   };
 
-  const handleLetterOpen = () => {
+  const handleInvitationClick = () => {
     window.dispatchEvent(new Event('wedding-invitation-opened'));
+  };
 
+  const handleLetterOpen = () => {
     setShowLetter(false);
 
     setTimeout(() => {
@@ -63,6 +65,7 @@ export default function HomeView() {
         <Suspense fallback={null}>
           <LetterAnimation
             onOpen={handleLetterOpen}
+            onInvitationClick={handleInvitationClick}
             coupleName={`${WEDDING_CONFIG.bride.name} & ${WEDDING_CONFIG.groom.name}`}
           />
         </Suspense>

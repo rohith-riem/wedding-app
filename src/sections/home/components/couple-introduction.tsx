@@ -46,8 +46,13 @@ export const CoupleIntroduction = ({
 
           <div className="w-24 h-px bg-rose-400 mx-auto"></div>
 
-          <p className="text-base sm:text-lg md:text-xl text-gray-600 mt-6 max-w-2xl mx-auto">
-            {t('couple.story-text')}
+          <p className="text-xl sm:text-2xl md:text-3xl font-serif italic text-gray-700 mt-6">
+            From Kerala and Tamil Nadu, via Mysore.
+          </p>
+
+          <p className="text-base sm:text-lg md:text-xl text-gray-600 mt-3 max-w-2xl mx-auto">
+            Different backgrounds, different journeys, and one city where our
+            paths happened to cross.
           </p>
         </motion.div>
 

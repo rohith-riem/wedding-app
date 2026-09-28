@@ -1,3 +1,4 @@
+```tsx
 'use client';
 
 import { useState, useEffect, Suspense } from 'react';
@@ -113,7 +114,7 @@ export default function HomeView() {
       </section>
 
       {/* Music Player */}
-      <MusicPlayer />
+      <MusicPlayer shouldStart={!showLetter} />
 
       {/* Mobile Navigation FAB */}
       <NavigationFAB
@@ -126,3 +127,4 @@ export default function HomeView() {
     </div>
   );
 }
+```

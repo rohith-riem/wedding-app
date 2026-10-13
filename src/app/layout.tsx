@@ -11,9 +11,14 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: 'The Wedding of Fiqri & Beloved',
+  title: 'The Wedding of Rohith & Sruthi',
   description:
     'Join us in celebrating the wedding of Rohith & Sruthi.',
+  openGraph: {
+    title: 'The Wedding of Rohith & Sruthi',
+    description: 'Join us in celebrating our wedding. Tap to see the details.',
+    type: 'website',
+  },
 };
 
 export default function RootLayout({
